@@ -3366,6 +3366,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lucide@^1.30.0:
+  version "1.30.0"
+  resolved "https://registry.yarnpkg.com/lucide/-/lucide-1.30.0.tgz#c1ac6bd5f709fffffb02099f88f1d22b9462d1c2"
+  integrity sha512-K6fsjKaZmzrvDATXHpKdRRNresG/z5/RnGK6OPJRoZ5Pu4A/OOJRFM/BlGpDsUeRZl12Hj3ULmXqz1qObs6x3A==
+
 magic-string-ast@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/magic-string-ast/-/magic-string-ast-1.0.3.tgz#51ef7832fd5c70a0188fb94627caa3b8c74ff9bf"
@@ -3498,6 +3503,11 @@ mocked-exports@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/mocked-exports/-/mocked-exports-0.1.1.tgz#6916efea9a9dd0f4abd6a0a72526f56a76c966ea"
   integrity sha512-aF7yRQr/Q0O2/4pIXm6PZ5G+jAd7QS4Yu8m+WEeEHGnbo+7mE36CbLSDQiXYV8bVL3NfmdeqPJct0tUlnjVSnA==
+
+morphicons@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/morphicons/-/morphicons-1.6.0.tgz#b575bfdb7b26a6d12b5ed7407bd59e50c66c4f01"
+  integrity sha512-Sq1110Tzm53D07V6T2smlU6aXVb3XACdF7MSred76ttuhpVj6Rvt4i4D5N7m/GYEJ5GaK89XBTJRBm8SQvGWGA==
 
 mrmime@^2.0.0:
   version "2.0.1"
