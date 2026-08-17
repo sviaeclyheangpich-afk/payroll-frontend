@@ -5,6 +5,20 @@
   --color-secondary: #000000;
 
   --font-sans: "Inter", sans-serif;
+  --animate-spin: spin 500ms linear infinite;
+  --animate-bound-out: bounce-out 500ms ease 1;
+
+    @keyframes bounce-out {
+    0%,
+    100% {
+      transform: scale(1);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: scale(1.4);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
 }
 
 body {
@@ -12,5 +26,5 @@ body {
 }
 
 @utility center-container {
-  @apply max-w-[75%] mx-auto;
+  @apply max-w-[85%] mx-auto;
 }
