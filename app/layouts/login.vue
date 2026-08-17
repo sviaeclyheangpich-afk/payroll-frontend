@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Login Layout
-        <slot />
-    </div>
+  <div>
+    Login Layout
+    <slot />
+  </div>
 </template>

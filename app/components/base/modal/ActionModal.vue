@@ -1,29 +1,21 @@
 <script setup lang="ts">
 interface ErrorModalProps {
-  isOpen: boolean;
-  title: string;
-  description?: string;
-  btnCancelLabel?: string;
-  btnConfirmLabel?: string;
+  isOpen: boolean
+  title: string
+  description?: string
+  btnCancelLabel?: string
+  btnConfirmLabel?: string
 }
 
-withDefaults(defineProps<ErrorModalProps>(), {
-  isOpen: false,
-});
-
-defineEmits(["close", "confirm"]);
+withDefaults(defineProps<ErrorModalProps>(), { isOpen: false })
+defineEmits(['close', 'confirm'])
 </script>
 
 <template>
   <Modal :open="isOpen">
-    <div
-      class="bg-black min-w-[30dvw] max-w-sm px-6 pb-4 pt-8 rounded-sm border border-white/20"
-    >
+    <div class="bg-black min-w-125 max-w-sm px-8 pb-6 pt-8 rounded-sm border border-white/20">
       <div class="space-y-0.5">
-        <p
-          v-if="title"
-          class="text-gray-300 font-bold uppercase text-lg text-center"
-        >
+        <p v-if="title" class="text-gray-300 font-bold uppercase text-lg text-center">
           {{ title }}
         </p>
         <p v-if="description" class="text-gray-500 text-sm text-center">
@@ -33,17 +25,19 @@ defineEmits(["close", "confirm"]);
 
       <div class="w-full flex gap-4 mt-8">
         <button
+          class="cursor-pointer py-2 border grow border-green-600 text-sm rounded-sm text-gray-300"
+          :class="['hover:bg-green-600/10 duration-150 ease-out hover:text-green-600']"
           @click.stop="$emit('close')"
-          class="cursor-pointer py-2 border grow border-green-700 text-sm rounded-xs text-green-600"
         >
-          {{ btnCancelLabel || "Cancel" }}
+          {{ btnCancelLabel || 'Cancel' }}
         </button>
 
         <button
+          class="cursor-pointer py-2 bg-green-600 grow text-sm rounded-sm text-gray-200"
+          :class="['hover:bg-green-700 duration-150 ease-out']"
           @click.stop="$emit('confirm')"
-          class="cursor-pointer py-2 bg-green-700 grow text-sm rounded-xs text-gray-200"
         >
-          {{ btnConfirmLabel || "Confirm" }}
+          {{ btnConfirmLabel || 'Confirm' }}
         </button>
       </div>
     </div>

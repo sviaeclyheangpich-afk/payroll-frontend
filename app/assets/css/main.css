@@ -1,14 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: #499a13;
   --color-secondary: #000000;
 
-  --font-sans: "Inter", sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --animate-spin: spin 500ms linear infinite;
   --animate-bound-out: bounce-out 500ms ease 1;
 
-    @keyframes bounce-out {
+  @keyframes bounce-out {
     0%,
     100% {
       transform: scale(1);

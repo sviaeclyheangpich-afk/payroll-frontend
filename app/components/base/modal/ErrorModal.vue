@@ -1,33 +1,26 @@
 <script setup lang="ts">
 interface ErrorModalProps {
-  isOpen: boolean;
-  statusCode: number;
-  title: string;
-  description?: string;
-  btnLabel?: string;
+  isOpen: boolean
+  statusCode: number
+  title: string
+  description?: string
+  btnLabel?: string
 }
 
 withDefaults(defineProps<ErrorModalProps>(), {
-  isOpen: false,
-});
+  isOpen: false
+})
 
-defineEmits(["close"]);
+defineEmits(['close'])
 </script>
 
 <template>
   <Modal :open="isOpen">
-    <div
-      class="bg-black min-w-[30dvw] px-6 pb-4 pt-6 rounded-sm border border-white/20"
-    >
+    <div class="bg-black min-w-[30dvw] px-6 pb-4 pt-6 rounded-sm border border-white/20">
       <div class="flex items-center gap-2 border-b border-white/15 pb-3">
-        <span
-          class="text-white text-xs rounded-xs pl-1.5 pr-2.5 py-2 border border-red-700"
-          ><span class="px-2 py-1 bg-red-600/40 rounded-xs mr-1 uppercase"
-            >Status</span
-          >
-          <span v-if="statusCode" class="font-bold">{{
-            statusCode
-          }}</span></span
+        <span class="text-white text-xs rounded-xs pl-1.5 pr-2.5 py-2 border border-red-700"
+          ><span class="px-2 py-1 bg-red-600/40 rounded-xs mr-1 uppercase">Status</span>
+          <span v-if="statusCode" class="font-bold">{{ statusCode }}</span></span
         >
       </div>
 
@@ -43,7 +36,7 @@ defineEmits(["close"]);
           @click.stop="$emit('close')"
           class="cursor-pointer py-2 bg-red-700 grow text-sm rounded-xs text-gray-200"
         >
-          {{ btnLabel || "Dismiss" }}
+          {{ btnLabel || 'Dismiss' }}
         </button>
       </div>
     </div>

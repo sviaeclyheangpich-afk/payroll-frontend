@@ -15,13 +15,13 @@
         {
           backgroundColor: '#020617',
           backgroundImage: `linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(71,85,105,0.2) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(139,92,246,0.30) 0%, transparent 50%)`,
-          backgroundSize: '32px 32px, 32px 32px, 100% 100%',
-        },
+          backgroundSize: '32px 32px, 32px 32px, 100% 100%'
+        }
       ]"
     ></div>
 
     <div
-      class="absolute z-20 w-[45dvw] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col space-y-3 flex-1 items-center justify-center h-fit"
+      class="absolute z-20 w-175 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col space-y-3 flex-1 items-center justify-center h-fit"
     >
       <div
         class="flex w-full flex-col items-center justify-center space-y-3 bg-black/10 rounded-sm py-10 px-16 border border-white/15 backdrop-blur-md drop-shadow-2xl"
@@ -70,20 +70,12 @@
               class="cursor-pointer absolute right-2"
               @click.stop="revealPassword = !revealPassword"
             >
-              <MorphIcon
-                :icon="!revealPassword ? Eye : EyeOff"
-                class="size-4 text-gray-500"
-              />
+              <MorphIcon :icon="!revealPassword ? Eye : EyeOff" class="size-4 text-gray-500" />
             </div>
           </div>
         </div>
 
-        <Button
-          class="w-1/3 mt-4"
-          label="Login Now"
-          styled="filled"
-          @click="handleLogin"
-        />
+        <Button class="w-1/3 mt-4" label="Login Now" styled="filled" @click="handleLogin" />
 
         <!-- <div
                                                                                                                               class="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-full mt-4"
@@ -110,23 +102,23 @@
 </template>
 
 <script setup lang="ts">
-import IconUser from "~/assets/icons/user-round.svg";
-import IconKey from "~/assets/icons/key.svg";
+import IconUser from '~/assets/icons/user-round.svg'
+import IconKey from '~/assets/icons/key.svg'
 
-import { MorphIcon } from "morphicons/vue";
-import { Eye, EyeOff } from "lucide";
+import { MorphIcon } from 'morphicons/vue'
+import { Eye, EyeOff } from 'lucide'
 
-const revealPassword = ref(false);
+const revealPassword = ref(false)
 
-const openModal = ref(false);
+const openModal = ref(false)
 
 const toggleModal = () => {
-  openModal.value = !openModal.value;
-};
+  openModal.value = !openModal.value
+}
 
 const handleLogin = async () => {
   setTimeout(() => {
-    toggleModal();
-  }, 3000);
-};
+    toggleModal()
+  }, 3000)
+}
 </script>
