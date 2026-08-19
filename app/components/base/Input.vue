@@ -1,24 +1,51 @@
 <template>
-  <input
-    :disabled="disabled"
-    autoComplete="additional-name"
-    :aria-label="ariaLabel"
-    class="w-full focus:border-green-500 focus:outline-0 focus:ring-0 border text-sm text-gray-200 border-gray-50/10 rounded-xs bg-white/2 py-1.5 pl-10 pr-2.5 placeholder:text-[13px] placeholder:text-gray-300"
-    :type="type"
-    :placeholder="placeholder"
-    :maxLength="maxLength"
-    :required="required"
-  />
+  <div
+    class="relative flex items-center gap-2.5 grow bg-white/4 p-1.5 rounded-sm outline focus-within:outline-2"
+    :class="[
+      inputClass,
+      {
+        'focus-within:outline-green-600 outline-gray-50/10': variant === 'Normal',
+        'focus-within:outline-green-700 outline-green-600': variant === 'Success',
+        'focus-within:outline-blue-700 outline-blue-600': variant === 'Info',
+        'focus-within:outline-red-700 outline-red-600': variant === 'Destructive',
+        'focus-within:outline-amber-700 outline-amber-600': variant === 'Warning'
+      }
+    ]"
+  >
+    <slot name="leadingIcon" />
+    <input
+      v-model="model"
+      :name="name"
+      :disabled="disabled"
+      :aria-label="ariaLabel"
+      :type="type"
+      :placeholder="placeholder"
+      :maxLength="maxLength"
+      :required="required"
+      class="border-0 border-none bg-transparent! bg-none! grow text-sm font-normal text-gray-200 placeholder:text-[13px] placeholder:text-gray-300 outline-0 right-0"
+    />
+    <slot name="trailingIcon" />
+  </div>
 </template>
 
 <script setup lang="ts">
+type InputVariant = 'Success' | 'Destructive' | 'Info' | 'Warning' | 'Normal';
+
 interface InputProps {
-  type?: 'text' | 'email' | 'password'
-  placeholder?: string
-  required?: boolean
-  maxLength?: number
-  ariaLabel?: string
-  disabled?: boolean
+  variant?: InputVariant;
+  type?: 'text' | 'email' | 'password';
+  placeholder?: string;
+  required?: boolean;
+  maxLength?: number;
+  ariaLabel?: string;
+  disabled?: boolean;
+  inputClass?: string;
+  name?: string;
 }
-defineProps<InputProps>()
+
+withDefaults(defineProps<InputProps>(), {
+  variant: 'Normal'
+});
+
+const model = defineModel();
 </script>

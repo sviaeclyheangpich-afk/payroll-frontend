@@ -6,12 +6,11 @@ interface ErrorModalProps {
   variant?: ActionModalVariant;
   title: string;
   description?: string;
-  btnCancelLabel?: string;
-  btnConfirmLabel?: string;
+  btnLabel?: string;
 }
 
 withDefaults(defineProps<ErrorModalProps>(), { isOpen: false, variant: 'Success' });
-defineEmits(['close', 'confirm']);
+defineEmits(['click']);
 </script>
 
 <template>
@@ -32,22 +31,14 @@ defineEmits(['close', 'confirm']);
         </p>
       </div>
 
-      <div class="w-full flex gap-4 mt-6">
+      <div class="w-full flex gap-4 mt-4">
         <Button
           :variant="variant"
-          styled="Outline"
+          styled="Filled"
           text-class="text-sm!"
-          btn-class="rounded-sm! grow max-w-1/2"
-          :label="btnCancelLabel || 'Cancel'"
-          @click="$emit('close')"
-        />
-
-        <Button
-          :variant="variant"
-          text-class="text-sm!"
-          btn-class="rounded-sm! grow max-w-1/2"
-          :label="btnConfirmLabel || 'Confirm'"
-          @click="$emit('confirm')"
+          btn-class="rounded-sm! grow"
+          :label="btnLabel || 'Cancel'"
+          @click="$emit('click')"
         />
       </div>
     </div>

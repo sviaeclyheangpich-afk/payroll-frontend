@@ -21,6 +21,16 @@
   }
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  -webkit-text-fill-color: white;
+  opacity: 0.8;
+  transition: background-color 9999s ease-out;
+}
+
 body {
   font-family: var(--font-sans);
 }
