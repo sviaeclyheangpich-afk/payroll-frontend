@@ -1,8 +1,11 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #499a13;
-  --color-secondary: #000000;
+  --color-primary: #111111;
+  --color-secondary-01: #0a0a0a;
+  --color-secondary-02: #131313;
+  --color-dark-gray-alpha-primary: #1a1a1a;
+  --color-dark-gray-alpha-secondary: #1e1e1e;
 
   --font-sans: 'Inter', sans-serif;
   --animate-spin: spin 500ms linear infinite;

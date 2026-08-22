@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import IconUser from '~/assets/icons/user-round.svg';
-import IconKey from '~/assets/icons/key.svg';
+import IconUser from '~~/public/icons/user-round.svg';
+import IconKey from '~~/public/icons/key.svg';
 
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod';
 
 import { MorphIcon } from 'morphicons/vue';
-import { LogIn, MessageCircleWarning } from 'lucide';
+import { Loader2, LogIn, MessageCircleWarning } from 'lucide';
+
+definePageMeta({
+  pageTransition: true,
+  name: 'Authentication page',
+  layout: 'auth'
+});
+
+const auth = useAuth();
 
 const state = reactive({ isloading: false, isError: false, msg: '' });
 const infoModal = reactive({ isOpen: false, title: '', subtitle: '' });
-
-const database = {
-  email: 'lyheangdev@gmail.com',
-  password: '1234@svi'
-};
 
 const loginValidationSchema = toTypedSchema(
   z.object({
@@ -41,27 +44,25 @@ const { handleSubmit, errors } = useForm({
 const { value: email } = useField('email');
 const { value: password } = useField('password');
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(async (formData) => {
   state.isloading = true;
   state.isError = false;
   state.msg = '';
 
-  setTimeout(async () => {
-    if (values.email != database.email || values.password != database?.password) {
-      state.isError = true;
-      state.msg = 'Invalid user login';
-      state.isloading = false;
-      return;
-    }
+  try {
+    await auth.login(formData.email, formData.password);
+  } catch (err) {
+    state.isError = true;
+    state.msg = (err || '') as string;
+  } finally {
     state.isloading = false;
-    return await navigateTo('/dashboard');
-  }, 2000);
+  }
 });
 
 const openModal = () => {
   infoModal.isOpen = true;
-  infoModal.title = 'Contact For System Support';
-  infoModal.subtitle = 'lyheang.pich@svi-aec.com';
+  infoModal.title = 'Contact for system support';
+  infoModal.subtitle = 'lyheang.pic@svi-aec.com';
 };
 
 const closeModal = () => {
@@ -88,7 +89,7 @@ const closeModal = () => {
       :style="[
         {
           backgroundColor: '#020617',
-          backgroundImage: `linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(71,85,105,0.2) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(139,92,246,0.30) 0%, transparent 50%)`,
+          backgroundImage: `linear-gradient(to right, rgba(71,85,105,0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(71,85,105,0.2) 1px, transparent 1px), radial-gradient(circle at 50% 50%, rgba(22, 36, 86,0.80) 0%, transparent 50%)`,
           backgroundSize: '32px 32px, 32px 32px, 100% 100%'
         }
       ]"
@@ -122,7 +123,7 @@ const closeModal = () => {
 
       <!-- Form -->
       <div class="w-full grid grid-cols-2 gap-4">
-        <div>
+        <div class="space-y-1.5">
           <Input
             v-model="email"
             aria-label="Email address"
@@ -144,7 +145,7 @@ const closeModal = () => {
           <ErrorMessage :error-message="errors?.email" />
         </div>
 
-        <div>
+        <div class="space-y-1.5">
           <InputPassword
             name="password"
             v-model="password"
@@ -164,7 +165,7 @@ const closeModal = () => {
 
       <div
         role="button"
-        class="group/support py-0.75 px-1.5 rounded-full bg-white/5 absolute bottom-2 right-2 flex items-center gap-1 border border-white/5 cursor-pointer"
+        class="group/support py-0.75 px-1.5 rounded-md bg-white/5 absolute bottom-2 right-2 flex items-center gap-1 border border-white/5 cursor-pointer"
         @click.stop="openModal"
       >
         <MorphIcon
@@ -176,33 +177,22 @@ const closeModal = () => {
         >
       </div>
 
-      <Transition
-        name="fade"
-        mode="out-in"
+      <Button
+        type="submit"
+        class="w-1/3 mt-4"
+        label="Login Now"
+        styled="Filled"
+        variant="Success"
       >
-        <Button
-          v-if="!state.isloading"
-          type="submit"
-          class="w-1/3 mt-4"
-          label="Login Now"
-          styled="Filled"
-          variant="Success"
-        >
-          <template #leadingIcon>
-            <MorphIcon
-              :icon="LogIn"
-              class="size-4 text-gray-300"
-            />
-          </template>
-        </Button>
-        <div
-          v-else
-          class="flex items-center gap-2 px-4 py-2 bg-white/5 border-2 border-green-600/80 rounded-full mt-4"
-        >
-          <Loader variant="Success" />
-          <span class="text-xs animate-pulse text-gray-200">Authenticating ...</span>
-        </div>
-      </Transition>
+        <template #leadingIcon>
+          <MorphIcon
+            :icon="!state.isloading ? LogIn : Loader2"
+            class="size-4! text-gray-300"
+            :class="state.isloading ? 'animate-spin' : ''"
+          />
+        </template>
+      </Button>
+
       <p class="text-xs text-gray-400 absolute top-full mt-4">SVI AEC All right reserved © 2026</p>
     </form>
     <div

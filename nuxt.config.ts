@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   components: [{ path: '~/components', pathPrefix: false, global: false }],
   vite: { plugins: [tailwindcss()] },
-  modules: ['@nuxt/image', 'nuxt-svgo', '@nuxtjs/google-fonts', '@nuxt/eslint'],
+  modules: ['@nuxt/image', 'nuxt-svgo', '@nuxtjs/google-fonts', '@nuxt/eslint', '@pinia/nuxt'],
   svgo: { dts: true },
   googleFonts: {
     families: { Inter: [200, 300, 400, 500, 600, 700] },
@@ -15,5 +15,8 @@ export default defineNuxtConfig({
     subsets: ['latin'],
     download: true,
     preload: true
+  },
+  runtimeConfig: {
+    url: 'https://my-json-server.typicode.com/sviaeclyheangpich-afk/dummy-server/users'
   }
 });
